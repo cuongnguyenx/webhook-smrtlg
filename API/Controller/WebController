@@ -1,0 +1,53 @@
+'use strict';
+var mongoose = require('mongoose');
+
+exports.processRequest = function(req, res) {
+    if (req.body.queryResult.intent == "addNumber") {
+        solveAdd(req,res);
+    }
+    else if (req.body.queryResult.intent == "multiplyNumber")
+    {
+        solveMul(req,res);
+    }
+
+    else if (req.body.queryResult.intent == "subtractNumber")
+    {
+        solveSub(req,res);
+    }
+};
+
+    function solveAdd(req,res)
+    {
+        var para= req.body.queryResult.parameters;
+    var num1= para.number1;
+    var num2= para.number2;
+    
+
+    var sum= num1+num2;
+    return res.json({
+        fulfillmentText: (num1+" plus "+num2+" equals "+sum+".")
+    });
+}
+
+
+function solveMul(req,res) {
+    var num1 = req.parameters.indexOf(0)
+    var num2 = req.parameters.indexOf(1);
+
+    var product = num1 * num2;
+    return res.json({
+        fulfillmentText: (num1 + " multiply " + num2 + " equals " + product + ".")
+    });
+}
+
+
+function solveSub(req,res) {
+    var num1 = req.parameters.indexOf(0)
+    var num2 = req.parameters.indexOf(1);
+
+    var diff = Math.abs(num1 - num2);
+    if (num1<num2) diff=-diff;
+    return res.json({
+        fulfillmentText: (num1 + " subtract " + num2 + " equals " + diff + ".")
+    });
+}
