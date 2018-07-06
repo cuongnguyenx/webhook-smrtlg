@@ -21,7 +21,7 @@ exports.processRequest = function(req, res) {
         var para= req.body.queryResult.parameters;
     var num1= para.number1;
     var num2= para.number2;
-    
+
 
     var sum= num1+num2;
     return res.json({
@@ -31,8 +31,9 @@ exports.processRequest = function(req, res) {
 
 
 function solveMul(req,res) {
-    var num1 = req.parameters.indexOf(0)
-    var num2 = req.parameters.indexOf(1);
+    var para= req.body.queryResult.parameters;
+    var num1= para.number1;
+    var num2= para.number2;
 
     var product = num1 * num2;
     return res.json({
@@ -42,8 +43,9 @@ function solveMul(req,res) {
 
 
 function solveSub(req,res) {
-    var num1 = req.parameters.indexOf(0)
-    var num2 = req.parameters.indexOf(1);
+    var para= req.body.queryResult.parameters;
+    var num1= para.number1;
+    var num2= para.number2;
 
     var diff = Math.abs(num1 - num2);
     if (num1<num2) diff=-diff;
