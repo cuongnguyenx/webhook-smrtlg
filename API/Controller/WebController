@@ -25,9 +25,9 @@ exports.processRequest = function(req, res) {
 
     var sum= num1+num2;
     return res.json({
-        fulfillmentText: (num1 + " plus " + num2 + " equals " + product + "."),
-        fulfillmentMessages: (num1 + " plus " + num2 + " equals " + product + "."),
-        source: 'None'
+        fulfillmentText: (num1 + " plus " + num2 + " equals " + sum + "."),
+        fulfillmentMessages: (num1 + " plus " + num2 + " equals " + sum + "."),
+        source: 'Yes'
     });
 }
 
@@ -41,7 +41,7 @@ function solveMul(req,res) {
     return res.json({
         fulfillmentText: (num1 + " multiply " + num2 + " equals " + product + "."),
         fulfillmentMessages: (num1 + " multiply " + num2 + " equals " + product + "."),
-        source: 'None'
+        source: 'Yes'
     });
 }
 
@@ -54,8 +54,8 @@ function solveSub(req,res) {
     var diff = Math.abs(num1 - num2);
     if (num1<num2) diff=-diff;
     return res.json({
-        fulfillmentText: (num1 + " subtract " + num2 + " equals " + product + "."),
-        fulfillmentMessages: (num1 + " subtract" + num2 + " equals " + product + "."),
-        source: 'None'
+        fulfillmentText: (num1 + " subtract " + num2 + " equals " + diff + "."),
+        fulfillmentMessages: (num1 + " subtract" + num2 + " equals " + diff + "."),
+        source: 'Yes'
     });
 }
