@@ -2,7 +2,6 @@
 var express  = require('express'),
     bodyParser   = require('body-parser'),
     http         = require('http'),
-    config       = require('./Config'),
     app          = express(),
     mongoose     = require('mongoose');
 
