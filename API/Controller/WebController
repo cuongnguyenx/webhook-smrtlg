@@ -27,7 +27,7 @@ exports.processRequest = function(req, res) {
     return res.json({
         fulfillmentText: (num1 + " plus " + num2 + " equals " + sum + "."),
         fulfillmentMessages: (num1 + " plus " + num2 + " equals " + sum + "."),
-        source: 'Yes'
+        source: 'No'
     });
 }
 
@@ -41,7 +41,7 @@ function solveMul(req,res) {
     return res.json({
         fulfillmentText: (num1 + " multiply " + num2 + " equals " + product + "."),
         fulfillmentMessages: (num1 + " multiply " + num2 + " equals " + product + "."),
-        source: 'Yes'
+        source: 'No'
     });
 }
 
@@ -56,6 +56,6 @@ function solveSub(req,res) {
     return res.json({
         fulfillmentText: (num1 + " subtract " + num2 + " equals " + diff + "."),
         fulfillmentMessages: (num1 + " subtract" + num2 + " equals " + diff + "."),
-        source: 'Yes'
+        source: 'No'
     });
 }
