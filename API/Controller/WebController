@@ -1,7 +1,7 @@
 'use strict';
 var mongoose = require('mongoose'),
     uploadText = mongoose.model('uploadText');
-
+var db = mongoose.connection;
 
 exports.processRequest = function(req, res) {
     if (req.body.queryResult.intent.displayName == "addNumber") {
@@ -27,7 +27,7 @@ exports.processRequest = function(req, res) {
 };
 
 function sendFail(req, res) {
-    uploadText.insert({queryText: req.body.queryText});
+    db.collection('uploadText').insert({queryText: req.body.queryText});
     return res.json({
         fulfillmentText: ("I can't answer your question"),
         source: 'https://webhook-smrtlg.herokuapp.com/'
