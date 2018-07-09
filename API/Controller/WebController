@@ -29,7 +29,7 @@ exports.processRequest = function(req, res) {
 function sendFail(req, res) {
     uploadText.insert({queryText: req.body.queryText});
     return res.json({
-        fulfillmentText: ("filler"),
+        fulfillmentText: ("I can't answer your question"),
         source: 'https://webhook-smrtlg.herokuapp.com/'
     });
 }
