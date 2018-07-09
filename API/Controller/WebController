@@ -2,15 +2,15 @@
 var mongoose = require('mongoose');
 
 exports.processRequest = function(req, res) {
-    if (req.body.queryResult.intent == "addNumber") {
+    if (req.body.queryResult.intent.displayName == "addNumber") {
         solveAdd(req,res);
     }
-    else if (req.body.queryResult.intent == "multiplyNumber")
+    else if (req.body.queryResult.intent.displayName == "multiplyNumber")
     {
         solveMul(req,res);
     }
 
-    else if (req.body.queryResult.intent == "subtractNumber")
+    else if (req.body.queryResult.intent.displayName == "subtractNumber")
     {
         solveSub(req,res);
     }
@@ -27,7 +27,7 @@ exports.processRequest = function(req, res) {
     return res.json({
         fulfillmentText: (num1 + " plus " + num2 + " equals " + sum + "."),
         fulfillmentMessages: (num1 + " plus " + num2 + " equals " + sum + "."),
-        source: 'https://webhook-diaflow.herokuapp.com/'
+        source: 'https://webhook-smrtlg.herokuapp.com/'
     });
 }
 
@@ -41,7 +41,7 @@ function solveMul(req,res) {
     return res.json({
         fulfillmentText: (num1 + " multiply " + num2 + " equals " + product + "."),
         fulfillmentMessages: (num1 + " multiply " + num2 + " equals " + product + "."),
-        source: 'https://webhook-diaflow.herokuapp.com/'
+        source: 'https://webhook-smrtlg.herokuapp.com/'
     });
 }
 
@@ -56,6 +56,6 @@ function solveSub(req,res) {
     return res.json({
         fulfillmentText: (num1 + " subtract " + num2 + " equals " + diff + "."),
         fulfillmentMessages: (num1 + " subtract" + num2 + " equals " + diff + "."),
-        source: 'https://webhook-diaflow.herokuapp.com/'
+        source: 'https://webhook-smrtlg.herokuapp.com/'
     });
 }
