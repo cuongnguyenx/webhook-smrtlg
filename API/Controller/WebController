@@ -1,61 +1,95 @@
 'use strict';
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    uploadText = mongoose.model('uploadText');
+
 
 exports.processRequest = function(req, res) {
-    if (req.body.queryResult.intent == "addNumber") {
+    if (req.body.queryResult.intent.displayName == "addNumber") {
         solveAdd(req,res);
     }
-    else if (req.body.queryResult.intent == "multiplyNumber")
+    else if (req.body.queryResult.intent.displayName == "multiplyNumber")
     {
         solveMul(req,res);
     }
 
-    else if (req.body.queryResult.intent == "subtractNumber")
+    else if (req.body.queryResult.intent.displayName == "subtractNumber")
     {
         solveSub(req,res);
     }
+
+    else if (req.body.queryResult.intent.displayName == "divideNumber") {
+        solveDiv(req, res);
+    }
+
+    else if (req.body.queryResult.intent.displayName = "Default Fallback Intent") {
+        sendFail(req, res);
+    }
 };
 
-    function solveAdd(req,res)
-    {
-        var para= req.body.queryResult.parameters;
-    var num1= para.number1;
-    var num2= para.number2;
+function sendFail(req, res) {
+    uploadText.insert({queryText: req.body.queryText});
+    return res.json({
+        fulfillmentText: ("filler"),
+        source: 'https://webhook-smrtlg.herokuapp.com/'
+    });
+}
+
+function solveAdd(req, res) {
+    var para = req.body.queryResult.parameters;
+    var num1 = para.number;
+    var num2 = para.number1;
 
 
     var sum= num1+num2;
     return res.json({
-        fulfillmentText: (num1 + " plus " + num2 + " equals " + sum + "."),
-        fulfillmentMessages: (num1 + " plus " + num2 + " equals " + sum + "."),
-        source: 'https://webhook-diaflow.herokuapp.com/'
+        fulfillmentText: (sum),
+        source: 'https://webhook-smrtlg.herokuapp.com/'
     });
 }
 
 
 function solveMul(req,res) {
     var para= req.body.queryResult.parameters;
-    var num1= para.number1;
-    var num2= para.number2;
+    var num1 = para.number;
+    var num2 = para.number1;
 
     var product = num1 * num2;
     return res.json({
-        fulfillmentText: (num1 + " multiply " + num2 + " equals " + product + "."),
-        fulfillmentMessages: (num1 + " multiply " + num2 + " equals " + product + "."),
-        source: 'https://webhook-diaflow.herokuapp.com/'
+        fulfillmentText: (product),
+        source: 'https://webhook-smrtlg.herokuapp.com/'
     });
 }
 
 
 function solveSub(req,res) {
     var para= req.body.queryResult.parameters;
-    var num1= para.number1;
-    var num2= para.number2;
+    var num1 = para.number;
+    var num2 = para.number1;
 
     var diff = Math.abs(num1 - num2);
     if (num1<num2) diff=-diff;
     return res.json({
-        fulfillmentText: (num1 + " subtract " + num2 + " equals " + diff + "."),
-        fulfillmentMessages: (num1 + " subtract" + num2 + " equals " + diff + "."),
-        source: 'https://webhook-diaflow.herokuapp.com/'
+        fulfillmentText: (diff),
+        source: 'https://webhook-smrtlg.herokuapp.com/'
     });
+}
+
+function solveDiv(req, res) {
+    var para = req.body.queryResult.parameters;
+    var num1 = para.number;
+    var num2 = para.number1;
+
+    if (num2 == 0) {
+        return res.json({
+            fulfillmentText: ("Cannot divide by 0"),
+            source: 'https://webhook-smrtlg.herokuapp.com/'
+        });
+    }
+    else {
+        var divi = num1 / num2;
+        return res.json({
+            fulfillmentText: (divi),
+            source: 'https://webhook-smrtlg.herokuapp.com/'
+        });
+    }
 }

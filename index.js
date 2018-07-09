@@ -3,11 +3,18 @@ var express  = require('express'),
     bodyParser   = require('body-parser'),
     http         = require('http'),
     app          = express(),
-    mongoose     = require('mongoose');
-
+    config = require('./config'),
+    mongoose = require('mongoose'),
+    uploadText = require('./API/Model/uploadText');
 // mongoose instance connection url connection
-//mongoose.Promise= global.Promise();
-//mongoose.connect(config.dbUrl,{ useMongoClient: true });
+mongoose.Promise = Promise;
+mongoose.connect(config.dbUrl);
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Connection Error : '));
+db.once('open', function () {
+    console.log('Connection ok!');
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
