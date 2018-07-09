@@ -14,6 +14,11 @@ exports.processRequest = function(req, res) {
     {
         solveSub(req,res);
     }
+
+    else if (req.body.queryResult.intent.displayName == "divideNumber")
+    {
+        solveDiv(req,res);
+    }
 };
 
     function solveAdd(req,res)
@@ -55,4 +60,25 @@ function solveSub(req,res) {
         fulfillmentText: (diff),
         source: 'https://webhook-smrtlg.herokuapp.com/'
     });
+}
+
+function solveDiv(req,res) {
+    var para= req.body.queryResult.parameters;
+    var num1= para.number;
+    var num2= para.number1;
+
+    if (num2==0)
+    {
+        return res.json({
+            fulfillmentText: ("Cannot divide by 0"),
+            source: 'https://webhook-smrtlg.herokuapp.com/'
+        });
+    }
+    else {
+        var divi = num1/num2;
+        return res.json({
+            fulfillmentText: (divi),
+            source: 'https://webhook-smrtlg.herokuapp.com/'
+        });
+    }
 }
