@@ -26,7 +26,6 @@ exports.processRequest = function(req, res) {
     var sum= num1+num2;
     return res.json({
         fulfillmentText: (num1 + " plus " + num2 + " equals " + sum + "."),
-        fulfillmentMessages: (num1 + " plus " + num2 + " equals " + sum + "."),
         source: 'https://webhook-smrtlg.herokuapp.com/'
     });
 }
@@ -40,7 +39,6 @@ function solveMul(req,res) {
     var product = num1 * num2;
     return res.json({
         fulfillmentText: (num1 + " multiply " + num2 + " equals " + product + "."),
-        fulfillmentMessages: (num1 + " multiply " + num2 + " equals " + product + "."),
         source: 'https://webhook-smrtlg.herokuapp.com/'
     });
 }
@@ -55,7 +53,6 @@ function solveSub(req,res) {
     if (num1<num2) diff=-diff;
     return res.json({
         fulfillmentText: (num1 + " subtract " + num2 + " equals " + diff + "."),
-        fulfillmentMessages: (num1 + " subtract" + num2 + " equals " + diff + "."),
         source: 'https://webhook-smrtlg.herokuapp.com/'
     });
 }
