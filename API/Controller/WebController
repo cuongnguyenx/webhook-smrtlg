@@ -27,9 +27,9 @@ exports.processRequest = function(req, res) {
 };
 
 function sendFail(req, res) {
-    db.collection('uploadText').insert({queryText: req.body.queryText});
+    db.collection('uploadText').insert({queryText: req.body.queryResult.queryText});
     return res.json({
-        fulfillmentText: ("I can't answer your question"),
+        fulfillmentText: ("I can't answer your question. Sent Response to Developers"),
         source: 'https://webhook-smrtlg.herokuapp.com/'
     });
 }
