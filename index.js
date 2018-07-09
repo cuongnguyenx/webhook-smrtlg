@@ -3,11 +3,12 @@ var express  = require('express'),
     bodyParser   = require('body-parser'),
     http         = require('http'),
     app          = express(),
+    config       = require('./config'),
     mongoose     = require('mongoose');
 
 // mongoose instance connection url connection
-//mongoose.Promise= global.Promise();
-//mongoose.connect(config.dbUrl,{ useMongoClient: true });
+mongoose.Promise= global.config;
+mongoose.connect(config.dbUrl,{ useMongoClient: true });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

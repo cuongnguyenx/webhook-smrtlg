@@ -19,8 +19,18 @@ exports.processRequest = function(req, res) {
     {
         solveDiv(req,res);
     }
+
+    else if (req.body.queryResult.intent.displayName= "Default Fallback Intent")
+    {
+        sendFail(req,res);
+    }
 };
 
+    function sendFail(req,res)
+    {
+
+    }
+    
     function solveAdd(req,res)
     {
         var para= req.body.queryResult.parameters;
